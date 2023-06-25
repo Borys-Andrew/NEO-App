@@ -17,7 +17,12 @@ function App() {
       try {
         const data = await getNeoData(startDate, endDate)
 
-        setAsteroids(prevstate => [...prevstate, getFilteredAsteroids(data)])
+        setAsteroids(prevState => {
+          if (prevState.length >= 6) {
+            prevState.shift();
+          }
+          return [...prevState, getFilteredAsteroids(data)];
+        });
 
         startDate = moment(startDate).add(1, 'days').format('YYYY-MM-DD')
         endDate = startDate
