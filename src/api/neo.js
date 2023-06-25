@@ -1,15 +1,26 @@
 import axios from 'axios';
 
 const API_KEY = import.meta.env.VITE_API_KEY
-const BASE_URL = 'https://api.nasa.gov/neo/'
+const BASE_URL = 'https://api.nasa.gov/neo/rest/v1/feed?'
 
 export const getNeoData = async(startDate, endDate) => {
-  const URL = `${BASE_URL}rest/v1/feed?start_date=${startDate}&end_date=${endDate}&api_key=${API_KEY}`
+  const URL = `${BASE_URL}start_date=${startDate}&end_date=${endDate}&api_key=${API_KEY}`
   try {
     const response = await axios.get(URL);
+    const result = Object.values(response.data.near_earth_objects)
+      .map((item) => (
+      item.map((asteroid) => ({
+        id: asteroid.id,
+        estimated_diameter_km: asteroid.estimated_diameter.kilometers.estimated_diameter_max,
+        is_potentially_hazardous_asteroid: asteroid.is_potentially_hazardous_asteroid,
+        miss_distance_km: asteroid.close_approach_data[0].miss_distance.kilometers,
+        relative_velocity_kph: asteroid.close_approach_data[0].relative_velocity.kilometers_per_hour
+      }))
+    )).flat()
 
-    return response.data.near_earth_objects
+    return result
   } catch (error) {
     console.log(error);
   }
 }
+

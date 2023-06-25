@@ -7,11 +7,13 @@ function App() {
   const [asteroids, setAsteroids] = useState([]);
 
   const geNeoList = async () => {
-    const startDate = moment(new Date).format('YYYY-MM-DD')
-    const endDate = moment(new Date).format('YYYY-MM-DD')
+    const startDate = moment().startOf('month').format('YYYY-MM-DD')
+    const endDate = moment(startDate).add(6, 'days').format('YYYY-MM-DD');
     try {
       const data = await getNeoData(startDate, endDate);
+
       setAsteroids(data);
+      // setAsteroids(prevState => [...prevState, ...data]);
     } catch (error) {
       console.log(error);
     }
