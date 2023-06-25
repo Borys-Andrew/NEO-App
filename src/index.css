@@ -7,18 +7,14 @@
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
   background-color: #242424;
+  background-image: url("https://www.freecodecamp.org/news/css-background-image-with-html-example-code");
+  background-repeat: no-repeat;
+  background-position: center;
+  /* background-size: cover; */
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
-}
-
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  height: 100vh;
 }
