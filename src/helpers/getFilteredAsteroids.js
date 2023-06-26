@@ -2,7 +2,7 @@ export function getFilteredAsteroids(objects) {
   let result = {
     date: objects[0].date,
     count: 0,
-    max_diameter_km: 0,
+    max_diameter_km: null,
     is_potentially_hazardous_asteroid: 0,
     miss_distance_km: objects[0].miss_distance_km,
     relative_velocity_kph: 0,

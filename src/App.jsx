@@ -10,26 +10,29 @@ function App() {
 
   const getNeoList = async () => {
     let startDate = moment().startOf('month').format('YYYY-MM-DD')
-    let endDate = startDate;
     const currentDate = moment().format('YYYY-MM-DD')
 
-    while (startDate <= currentDate ) {
+    setInterval(async() => {
       try {
-        const data = await getNeoData(startDate, endDate)
+        const data = await getNeoData(startDate)
+        const neoDaySummary = getFilteredAsteroids(data)
 
         setAsteroids(prevState => {
           if (prevState.length >= 6) {
             prevState.shift();
           }
-          return [...prevState, getFilteredAsteroids(data)];
+          return [...prevState, neoDaySummary];
         });
 
-        startDate = moment(startDate).add(1, 'days').format('YYYY-MM-DD')
-        endDate = startDate
+        if (startDate !== currentDate) {
+          startDate = moment(startDate).add(1, 'days').format('YYYY-MM-DD')
+        } else {
+          startDate = moment().startOf('month').format('YYYY-MM-DD')
+        }
       } catch (error) {
         throw new error;
       }
-    }
+    }, 5000)
   };
 
   useEffect(() => {

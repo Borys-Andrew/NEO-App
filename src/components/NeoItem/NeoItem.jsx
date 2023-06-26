@@ -2,15 +2,22 @@ import PropTypes from 'prop-types';
 
 
 function NeoItem({ el }) {
-  console.log('from item el==>', el.date);
+  const {
+    date,
+    count,
+    max_diameter_km,
+    is_potentially_hazardous_asteroid,
+    miss_distance_km,
+    relative_velocity_kph,
+  } = el
   return (
-    <tr>
-      <td>{el.date}</td>
-      <td>{el.count}</td>
-      <td>{el.max_diameter_km}</td>
-      <td>{el.is_potentially_hazardous_asteroid}</td>
-      <td>{el.miss_distance_km}</td>
-      <td>{el.relative_velocity_kph}</td>
+    <tr style={{ background: is_potentially_hazardous_asteroid && "red" }}>
+      <td>{date}</td>
+      <td>{count}</td>
+      <td>{max_diameter_km}</td>
+      <td>{is_potentially_hazardous_asteroid}</td>
+      <td>{miss_distance_km}</td>
+      <td>{relative_velocity_kph}</td>
     </tr>
   )
 }
@@ -19,13 +26,11 @@ NeoItem.propTypes = {
   el: PropTypes.shape({
     date: PropTypes.string.isRequired,
     count: PropTypes.number.isRequired,
-    total_count: PropTypes.number.isRequired,
     max_diameter_km: PropTypes.number.isRequired,
-    is_potentially_hazardous_asteroid: PropTypes.bool.isRequired,
+    is_potentially_hazardous_asteroid: PropTypes.number.isRequired,
     miss_distance_km: PropTypes.number.isRequired,
     relative_velocity_kph: PropTypes.number.isRequired,
   })
-
 }
 
 export default NeoItem;
