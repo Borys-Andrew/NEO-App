@@ -23,7 +23,7 @@ export const getNeoData = async(startDate, endDate = startDate) => {
       )
     }
 
-    console.log('result--->', result);
+    // console.log('result--->', result);
     return result;
   } catch (error) {
     console.log(error);

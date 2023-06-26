@@ -9,9 +9,10 @@ function NeoItem({ el }) {
     is_potentially_hazardous_asteroid,
     miss_distance_km,
     relative_velocity_kph,
+    is_highlited,
   } = el
   return (
-    <tr style={{ background: is_potentially_hazardous_asteroid && "red" }}>
+    <tr style={{ background: is_highlited && "red" }}>
       <td>{date}</td>
       <td>{count}</td>
       <td>{max_diameter_km}</td>
@@ -30,6 +31,7 @@ NeoItem.propTypes = {
     is_potentially_hazardous_asteroid: PropTypes.number.isRequired,
     miss_distance_km: PropTypes.number.isRequired,
     relative_velocity_kph: PropTypes.number.isRequired,
+    is_highlited: PropTypes.bool.isRequired,
   })
 }
 
